@@ -3,6 +3,8 @@ const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
+const { VuetifyPlugin } = require('webpack-plugin-vuetify')
+
 module.exports = (env = {}) => ({
   mode: 'development',
   cache: false,
@@ -55,6 +57,7 @@ module.exports = (env = {}) => ({
     ],
   },
   plugins: [
+    new VuetifyPlugin({ autoImport: true }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
