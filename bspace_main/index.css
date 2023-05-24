@@ -1,0 +1,11 @@
+body{
+    font-family: Poppins, Roboto, sans-serif !important;
+}
+
+div.poppins{
+    font-family: Poppins !important;
+}
+
+.font-weight-semibold{
+    font-weight: 600 !important;
+}
