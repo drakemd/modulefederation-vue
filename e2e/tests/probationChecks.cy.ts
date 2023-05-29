@@ -16,7 +16,8 @@ describe('BSpace Probation Appraisal Check',  () => {
             })
             basePage.clickElementWithText({
                 selector: baseSelectors.tags.coreElements.div,
-                text: 'Probation Appraisal'
+                text: 'Probation Appraisal',
+                wait: 2000
             })
             basePage.clickElementWithText({
                 selector: baseSelectors.tags.coreElements.div,

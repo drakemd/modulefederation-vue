@@ -1,58 +1,24 @@
 import { defineStore } from 'pinia'
+import { getData } from '../mock/mockRequest'
 
 export const useProbationStore = defineStore('probation', {
   state: () => {
     return {
-      data: [
-        { 
-          kpi: 'Redesign Performance',
-          weight: 50,
-          target: 100,
-          leadTo: 'Performance',
-          kpiList: [
-            'Concept Redesign',
-            'Menganalisis Design Performance',
-            'Review Performance'
-          ],
-          notes: '<ul><li><p>Concept Redesign</p></li><li><p>Menganalisis Design Performance</p></li><li><p>Review Performance</p></li></ul>',
-          showDetail: false,
-          edit: false
-        },
-        { 
-          kpi: 'Define Matrix Leadership Development',
-          weight: 30,
-          target: 100,
-          leadTo: 'Development',
-          kpiList: [
-            'Concept Redesign',
-            'Menganalisis Design Performance',
-            'Review Performance'
-          ],
-          notes: '<ul><li><p>Concept Redesign</p></li><li><p>Menganalisis Design Performance</p></li><li><p>Review Performance</p></li></ul>',
-          showDetail: false,
-          edit: false
-        },
-        { 
-          kpi: 'Melakukan Review Jobdesk',
-          weight: 20,
-          target: 100,
-          leadTo: 'Talent',
-          kpiList: [
-            'Concept Redesign',
-            'Menganalisis Design Performance',
-            'Review Performance'
-          ],
-          notes: '<ul><li><p>Concept Redesign</p></li><li><p>Menganalisis Design Performance</p></li><li><p>Review Performance</p></li></ul>',
-          showDetail: false,
-          edit: false
-        }
-      ]
+      data: [],
+      loading: false
     }
   },
   getters: {
     list: (state) => state.data,
+    isLoading: (state) => state.loading
   },
   actions: {
+    async fetchData() {
+      this.loading = true
+      let res = await getData()
+      this.data = res
+      this.loading = false
+    },
     toggleExpand(index) {
       let tempList = [...this.data]
       let tempData = {...tempList[index]}

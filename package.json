@@ -13,7 +13,7 @@
     "serve": "lerna run --parallel serve",
     "clean": "lerna run --parallel clean",
     "cypress:debug": "cypress open --e2e --config-file cypress/config/cypress.config.ts --browser=chrome",
-    "cypress:run": "cypress run --config-file cypress/config/cypress.config.ts --browser=chrome",
+    "cypress:run": "cypress run --spec e2e/tests/* --config-file cypress/config/cypress.config.ts --browser=chrome",
     "report:generate": "allure generate ./cypress/results/allure-results --clean -o ./cypress/report",
     "report:open": "allure open ./cypress/report",
     "e2e:ci": "yarn start & wait-on http-get://localhost:3001/ && npx cypress run --config-file ./cypress/config/cypress.config.ts --config '{\"supportFile\": \"./cypress/support/e2e.ts\"}' --spec \"./e2e/tests/runAll.cy.ts\" --browser=chrome"

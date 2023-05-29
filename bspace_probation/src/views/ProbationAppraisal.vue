@@ -32,26 +32,36 @@
             dark="true"
         />
     </div>
-    <v-table class="mt-3">
-        <thead>
-            <tr class="text-caption poppins tableHeader">
-                <th class="text-start">Item KPI</th>
-                <th class="text-start">Weight</th>
-                <th class="text-start">Target</th>
-                <th class="text-start">Lead To KPI Direct</th>
-                <th class="text-start">Action</th>
-                <th class="text-start"> </th>
-            </tr>
-        </thead>
-        <tbody>
-            <template v-for="(item, index) in list" :key="item.kpi">
-                <TableRow :item="item" :index="index" />
-            </template>
-            <template v-if="newData">
-                <TableRowNewData :onHide="toggleNewRow" />
-            </template>
-        </tbody>
-    </v-table>
+    <template v-if="!isLoading">
+        <v-table class="mt-3">
+            <thead>
+                <tr class="text-caption poppins tableHeader">
+                    <th class="text-start">Item KPI</th>
+                    <th class="text-start">Weight</th>
+                    <th class="text-start">Target</th>
+                    <th class="text-start">Lead To KPI Direct</th>
+                    <th class="text-start">Action</th>
+                    <th class="text-start"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template v-for="(item, index) in list" :key="item.kpi">
+                    <TableRow :item="item" :index="index" />
+                </template>
+                <template v-if="newData">
+                    <TableRowNewData :onHide="toggleNewRow" />
+                </template>
+            </tbody>
+        </v-table>
+    </template>
+    <template v-else>
+        <div class="w-100 d-flex align-center justify-center">
+            <v-progress-circular
+                indeterminate
+                color="primary"
+            ></v-progress-circular>
+        </div>
+    </template>
     <!-- <div class="d-flex mt-4">
         <div class="d-flex flex-1-0 align-center">
             <div>
@@ -125,7 +135,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { Colors } from '../../../bspace_design_system/src/constants/constants.js'
 import { useProbationStore } from '../stores/ProbationStore.js'
@@ -144,10 +154,14 @@ const newData = ref(false)
 const newFile = ref([])
 const files = ref([])
 
-const { list } = storeToRefs(store)
+const { list, isLoading } = storeToRefs(store)
 
 totalItem.value = list.value.length
-totalPage.value = Math.ceil(totalItem.value / pageSize.value);
+totalPage.value = Math.ceil(totalItem.value / pageSize.value)
+
+onMounted(() => {
+    store.fetchData()
+})
 
 function toggleNewRow() {
     newData.value = !newData.value

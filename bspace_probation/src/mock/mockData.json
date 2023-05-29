@@ -1,0 +1,44 @@
+[
+    { 
+        "kpi": "Redesign Performance",
+        "weight": 50,
+        "target": 100,
+        "leadTo": "Performance",
+        "kpiList": [
+        "Concept Redesign",
+        "Menganalisis Design Performance",
+        "Review Performance"
+        ],
+        "notes": "<ul><li><p>Concept Redesign</p></li><li><p>Menganalisis Design Performance</p></li><li><p>Review Performance</p></li></ul>",
+        "showDetail": false,
+        "edit": false
+    },
+    { 
+        "kpi": "Define Matrix Leadership Development",
+        "weight": 30,
+        "target": 100,
+        "leadTo": "Development",
+        "kpiList": [
+        "Concept Redesign",
+        "Menganalisis Design Performance",
+        "Review Performance"
+        ],
+        "notes": "<ul><li><p>Concept Redesign</p></li><li><p>Menganalisis Design Performance</p></li><li><p>Review Performance</p></li></ul>",
+        "showDetail": false,
+        "edit": false
+    },
+    { 
+        "kpi": "Melakukan Review Jobdesk",
+        "weight": 20,
+        "target": 100,
+        "leadTo": "Talent",
+        "kpiList": [
+        "Concept Redesign",
+        "Menganalisis Design Performance",
+        "Review Performance"
+        ],
+        "notes": "<ul><li><p>Concept Redesign</p></li><li><p>Menganalisis Design Performance</p></li><li><p>Review Performance</p></li></ul>",
+        "showDetail": false,
+        "edit": false
+    }
+]
