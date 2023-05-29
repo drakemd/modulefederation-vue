@@ -34,7 +34,7 @@
     </div>
     <template v-if="!isLoading">
         <v-table class="mt-3">
-            <thead>
+            <!-- <thead>
                 <tr class="text-caption poppins tableHeader">
                     <th class="text-start">Item KPI</th>
                     <th class="text-start">Weight</th>
@@ -43,7 +43,8 @@
                     <th class="text-start">Action</th>
                     <th class="text-start"> </th>
                 </tr>
-            </thead>
+            </thead> -->
+            <TableHeader />
             <tbody>
                 <template v-for="(item, index) in list" :key="item.kpi">
                     <TableRow :item="item" :index="index" />
@@ -142,6 +143,7 @@ import { useProbationStore } from '../stores/ProbationStore.js'
 import { Button } from '../../../bspace_design_system/src/components.js'
 import imageIcon from '../../../bspace_design_system/src/assets/imageicon.png'
 import pdfIcon from '../../../bspace_design_system/src/assets/pdfIcon.png'
+import TableHeader from '../components/TableHeader'
 import TableRow from '../components/TableRow'
 import TableRowNewData from '../components/TableRowNewData'
 
