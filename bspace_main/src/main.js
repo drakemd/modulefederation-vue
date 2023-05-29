@@ -1,38 +1,21 @@
 import { createApp, defineAsyncComponent } from 'vue'
 import Layout from './MainLayout.vue'
-
-// Vuetify
-import 'vuetify/styles'
-import '@mdi/font/css/materialdesignicons.css'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import { Colors } from '../../bspace_design_system/src/constants/constants'
+import { registerPlugins } from './plugins/index'
+import PubSub from './services/pubsub'
 import router from './router'
 
-const myCustomLightTheme = {
-  dark: false,
-  colors: Colors,
-}
+// Initialize PubSub Event messaging between apps
+const events = new PubSub({ persistedTopics: [] });
+window.fsEvents = events;
 
-const vuetify = createVuetify({
-    theme: {
-        defaultTheme: 'myCustomLightTheme',
-        themes: {
-          myCustomLightTheme,
-        },
-    },
-    components,
-    directives,
-})
-
-const Content = defineAsyncComponent(() => import('bspace_probation/Content'))
-const Button = defineAsyncComponent(() => import('bspace_probation/Button'))
+var subId = events.subscribe('mantul', (data) => console.log('data masuk main', data))
 
 const app = createApp(Layout)
-app.use(vuetify)
+registerPlugins(app)
 app.use(router)
-app.component('ContentElement', Content)
-app.component('ButtonElement', Button)
+
+// remote components
+const ProbationPage = defineAsyncComponent(() => import('bspace_probation/ProbationPage'))
+app.component('ProbationPage', ProbationPage)
 
 app.mount('#app')

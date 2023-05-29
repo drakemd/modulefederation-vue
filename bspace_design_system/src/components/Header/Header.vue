@@ -20,14 +20,14 @@
       :src="Avatar"
     ></v-img>
     <div class="d-flex justify-center text-caption font-weight-semibold poppins">{{ user.name }}</div>
-    <v-divider class="mx-4 my-4"></v-divider>
+    <v-divider class="mx-4 my-6"></v-divider>
     <ul>
       <li v-for="item in items">
         <div 
           @click="onClickRoute(item)"
           @mouseover="onMouseOver(item)"
           @mouseout="onMouseOut(item)"
-          class="d-flex align-center w-80 mx-5 my-1 px-4 py-3"
+          class="d-flex align-center w-80 mx-5 my-1 px-4 py-2"
           :class="{
             'menuButtonActive': isActive(item),
             'menuButton': !isActive(item),
@@ -38,7 +38,7 @@
             <ProbationIcon v-else-if="item.title === 'My Probation'" :stroke="getColor(item)" :size="22" />
             <OtherMenuIcon v-else :stroke="getColor(item)" :size="22" />
           </span>
-          <span class="text-caption">{{ item.title }}</span>
+          <span class="text-caption poppins">{{ item.title }}</span>
         </div>
       </li>
     </ul>
@@ -56,14 +56,12 @@
         <v-icon icon="mdi-bell-outline" color="primary" size="large"></v-icon>
       </v-badge>
     </v-btn>
-      <!-- <v-btn variant="text" icon="mdi-bell-outline" color="primary"></v-btn> -->
     <v-btn variant="text" icon="mdi-dots-vertical" color="primary"></v-btn>
   </v-app-bar>
 </template>
 
 <script setup>
   import { ref, watch } from 'vue'
-  import { useRouter, useRoute } from 'vue-router'
   import { Colors } from '../../constants/constants.js'
   import Logo from '../../assets/logo.png'
   import Avatar from '../../assets/avatar.png'
@@ -73,16 +71,14 @@
   import SearchInput from '../SearchInput/SearchInput.vue'
 
   const props = defineProps({
-    user: Object
+    user: Object,
+    router: Object,
+    route: Object
   })
-
-  console.log('user', props)
 
   const defaultDrawer = window.innerWidth >= 1280
   const drawer = ref(defaultDrawer)
   const onHover = ref([])
-  const router = useRouter()
-  const route = useRoute()
 
   const items = [
     {
@@ -134,12 +130,12 @@
   }
 
   function isActive(item) {
-    if(!route) return false
-    return item.route === route.path
+    if(!props.route) return false
+    return item.route === props.route.path
   }
 
   function onClickRoute(item) {
-    router.push(item.route)
+    props.router.push(item.route)
   }
 </script>
 
@@ -164,10 +160,6 @@
     color: white;
     cursor: pointer;
   }
-  /* .menuButtonActive:hover{
-    background-color: none;
-    color: #7B91B0;
-  } */
   .menuButton:hover{
     background-color: v-bind('Colors.primary');
     color: white;

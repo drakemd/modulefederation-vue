@@ -60,6 +60,7 @@ module.exports = (env = {}) => ({
     new VuetifyPlugin({ autoImport: true }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
+      ignoreOrder: true
     }),
     new ModuleFederationPlugin({
       name: 'bspace_probation',
@@ -68,11 +69,19 @@ module.exports = (env = {}) => ({
         bspace_probation: 'bspace_probation@http://localhost:3002/remoteEntry.js',
       },
       exposes: {
-        './Content': './src/components/RemoteContent',
-        './Button': './src/components/RemoteButton',
+        './ProbationPage': './src/App.vue'
       },
       shared: {
         vue: {
+          singleton: true,
+        },
+        vuetify: {
+          singleton: true,
+        },
+        pinia: {
+          singleton: true,
+        },
+        'vuetify-pro-tiptap': {
           singleton: true,
         },
       },

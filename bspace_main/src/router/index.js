@@ -17,8 +17,6 @@ const routes = [
   }
 ]
 
-console.log('url', process.env.BASE_URL)
-
 const router = createRouter({
   history: createWebHistory(),
   routes

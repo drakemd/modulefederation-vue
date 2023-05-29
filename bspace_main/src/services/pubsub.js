@@ -1,28 +1,13 @@
 import { v4 as uuid, validate as validateUUID } from "uuid";
 
-type Topic = string;
-type Message = Record<string, unknown>;
-type ID = string;
-type OnMessageFn = (message: Message) => void;
-
-export type Subscribe = (topic: Topic, onMessage: OnMessageFn) => ID;
-export type Publish = (topic: Topic, message: Record<string, unknown>) => void;
-export type UnSusbscribe = (id: ID) => void;
-
-export interface Events {
-  subscribe: Subscribe;
-  publish: Publish;
-  unsubscribe: UnSusbscribe;
-}
-
 export class PubSub {
-  constructor({ persistedTopics }: { persistedTopics?: Topic[] } = {}) {
+  constructor({ persistedTopics }) {
     if (persistedTopics && !Array.isArray(persistedTopics)) {
       throw new Error("Persisted topics must be an array of topics.");
     }
     if (persistedTopics) {
       this.persistedMessages = persistedTopics.reduce(
-        (acc: Record<Topic, Message>, cur: Topic) => {
+        (acc, cur) => {
           acc[cur] = {};
           return acc;
         },
@@ -33,13 +18,13 @@ export class PubSub {
     this.publish.bind(this);
   }
   // Keep track of all onMessage listeners with easy lookup by subscription id
-  private subscriberOnMsg: Record<ID, OnMessageFn> = {};
+  subscriberOnMsg = {};
   // Keep track of the topic for each subscription id for easier cleanup
-  private subscriberTopics: Record<ID, Topic> = {};
+  subscriberTopics = {};
   // Keep track of all topics and subscriber ids for each topic
-  private topics: Record<Topic, ID[]> = {};
+  topics = {};
   // Keep track of messages that are persisted and sent to new subscribers
-  private persistedMessages: Record<Topic, Message> = {};
+  persistedMessages = {};
 
   /**
    * Subscribe to messages being published in the given topic.
@@ -47,7 +32,7 @@ export class PubSub {
    * @param onMessage Function called whenever new messages on the topic are published.
    * @returns ID of this subscription.
    */
-  public subscribe(topic: Topic, onMessage: OnMessageFn): ID {
+  subscribe(topic, onMessage) {
     // Validate inputs
     if (typeof topic !== "string") throw new Error("Topic must be a string.");
     if (typeof onMessage !== "function")
@@ -75,7 +60,7 @@ export class PubSub {
    * Unsusbscribe for a given subscription id.
    * @param id Subscription id
    */
-  public unsubscribe(id: ID): void {
+  unsubscribe(id) {
     // Validate inputs
     if (typeof id !== "string" || !validateUUID(id)) {
       throw new Error("ID must be a valid UUID.");
@@ -107,7 +92,7 @@ export class PubSub {
    * @param topic The topic where the message is sent.
    * @param message The message to send. Only object format is supported.
    */
-  public publish(topic: Topic, message: Record<string, unknown>) {
+  publish(topic, message) {
     if (typeof topic !== "string") throw new Error("Topic must be a string.");
     if (typeof message !== "object") {
       throw new Error("Message must be an object.");

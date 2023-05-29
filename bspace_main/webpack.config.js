@@ -64,6 +64,7 @@ module.exports = (env = {}) => ({
         new VuetifyPlugin({ autoImport: true }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
+            ignoreOrder: true
         }),
         new ModuleFederationPlugin({
             name: 'bspace_main',
@@ -77,6 +78,12 @@ module.exports = (env = {}) => ({
                     singleton: true,
                 },
                 vuetify: {
+                    singleton: true,
+                },
+                pinia: {
+                    singleton: true,
+                },
+                'vuetify-pro-tiptap': {
                     singleton: true,
                 },
             },

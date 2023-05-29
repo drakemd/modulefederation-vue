@@ -18,18 +18,6 @@ td.poppins{
     font-family: Poppins !important;
 }
 
-button.poppins{
-    font-family: Poppins !important;
-}
-
-td div .vuetify-pro-tiptap-editor__content.view.markdown-body{
-    font-size: 0.75rem !important;
-    font-weight: 400;
-    line-height: 1.25rem;
-    letter-spacing: 0.0333333333em !important;
-    text-transform: none !important;
-}
-
 .font-weight-semibold{
     font-weight: 600 !important;
 }

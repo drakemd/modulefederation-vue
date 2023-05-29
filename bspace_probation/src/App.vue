@@ -1,43 +1,42 @@
 <template>
     <div>
-        <h3>Main App</h3>
-        <RemoteContent />
-        <RemoteButton />
+        <div class="w-100 pt-7 tabHeader">
+            <div class="mx-6"><PageTitle title="My Probation" /></div>
+            <div class="mt-4">
+                <Tabs :items="items">
+                    <v-window-item
+                        v-for="item in items"
+                        :key="item"
+                        :value="item"
+                    >
+                        <v-container v-if="item !== 'Probation Appraisal'" fluid class="tabContent">
+                            <div color="black">{{ item }}</div>
+                        </v-container>
+                        <v-container v-else fluid class="tabContent">
+                            <ProbationAppraisal />
+                        </v-container>
+                    </v-window-item>
+                </Tabs>
+            </div>
+        </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import { ref, defineAsyncComponent } from 'vue'
-// import Content from "./components/Content";
-// import Button from "./components/Button";
-export default {
-    components: {
-        RemoteContent: defineAsyncComponent(() => import('./components/RemoteContent')),
-        RemoteButton: defineAsyncComponent(() => import('./components/RemoteButton')),
-    },
-    // components: {
-    //   Content,
-    //   Button,
-    // },
-    setup() {
-        const count = ref(0)
-        const inc = () => {
-            count.value++
-        }
+import { Colors } from '../../bspace_design_system/src/constants/constants.js'
+import PageTitle from '../../bspace_design_system/src/components/PageTitle/PageTitle'
+import Tabs from '../../bspace_design_system/src/components/Tabs/Tabs'
+import ProbationAppraisal from './views/ProbationAppraisal'
 
-        return {
-            count,
-            inc,
-        }
-    },
-}
+const items = ['Coaching', 'Probation Appraisal', 'Behaviour Survey', 'Achievment Final']
 </script>
 
 <style scoped>
-img {
-    width: 200px;
+.tabHeader{
+    background-color: white;
 }
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
+.tabContent{
+    background-color: v-bind('Colors.background');
 }
 </style>
