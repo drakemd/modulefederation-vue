@@ -3,7 +3,7 @@
         <div class="w-100 pt-7 tabHeader">
             <div class="mx-6"><PageTitle title="My Probation" /></div>
             <div class="mt-4">
-                <Tabs :items="items">
+                <Tabs :items="items" color="primary">
                     <v-window-item
                         v-for="item in items"
                         :key="item"

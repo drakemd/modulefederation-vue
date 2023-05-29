@@ -9,7 +9,7 @@
             :value="item"
             class="tabItem"
             variant="text"
-            color="primary"
+            :color="color"
         >
             <span class="text-body-2 poppins font-weight-medium">{{ item }}</span>
         </v-tab>
@@ -24,7 +24,8 @@
     import { Colors } from '../../constants/constants.js'
 
     const props = defineProps({
-        items: Array
+        items: Array,
+        color: String
     })
 
     const tab = ref(null)

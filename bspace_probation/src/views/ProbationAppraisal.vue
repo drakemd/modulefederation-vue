@@ -23,18 +23,14 @@
         <div class="flex-1-0">
             <span class="text-caption poppins font-weight-bold">Probation List</span>
         </div>
-        <v-btn
+        <Button
             prepend-icon="mdi-plus"
             color="secondary"
             size="small"
-            class="addKpiButton"
             @click="toggleNewRow"
-        >
-            <template v-slot:prepend>
-                <v-icon color="#ffffff"></v-icon>
-            </template>
-                Add KPI
-        </v-btn>
+            label="Add KPI"
+            dark="true"
+        />
     </div>
     <v-table class="mt-3">
         <thead>
@@ -100,14 +96,13 @@
                 </v-file-input>
             </v-col>
             <v-col>
-                <v-btn
+                <Button
                     color="secondary"
-                    class="text-caption poppins addKpiButton"
                     size="large"
                     @click="onChooseFile"
-                >
-                        Choose File
-                </v-btn>
+                    label="Choose File"
+                    dark="true"
+                />
             </v-col>
         </v-row>
         <v-row>
@@ -121,13 +116,11 @@
         </v-row>
     </div>
     <div class="w-100 mt-2 d-flex justify-end">
-        <v-btn
+        <Button
             prepend-icon="mdi-content-save-outline"
             color="primary"
-            class="saveButton"
-        >
-            Save
-        </v-btn>
+            label="Save"
+        />
     </div>
 </template>
 
@@ -136,6 +129,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { Colors } from '../../../bspace_design_system/src/constants/constants.js'
 import { useProbationStore } from '../stores/ProbationStore.js'
+import { Button } from '../../../bspace_design_system/src/components.js'
 import imageIcon from '../../../bspace_design_system/src/assets/imageicon.png'
 import pdfIcon from '../../../bspace_design_system/src/assets/pdfIcon.png'
 import TableRow from '../components/TableRow'

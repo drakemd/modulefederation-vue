@@ -1,52 +1,60 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+    <v-btn 
+        :class="(dark ? 'darkText' : '') + ' defaultButton poppins'"
+        :variant="variant"
+        :size="size"
+        :color="color"
+        :prepend-icon="prependIcon"
+        :append-icon="appendIcon"
+        :icon="icon"
+        :rounded="rounded"
+        :density="density"
+        @click="onClick">{{ label }}</v-btn>
 </template>
 
-<script>
-import './button.css';
-import { reactive, computed } from 'vue';
-
-export default {
-  name: 'my-button',
-
-  props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    primary: {
-      type: Boolean,
-      default: false,
+<script setup>
+defineProps({
+    label: String,
+    variant: {
+        type: String,
+        validator: function (value) {
+            return ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'].indexOf(value) !== -1
+        },
     },
     size: {
-      type: String,
-      validator: function (value) {
-        return ['small', 'medium', 'large'].indexOf(value) !== -1;
-      },
+        type: String,
+        validator: function (value) {
+            return ['x-small', 'small', 'default', 'large', 'x-large'].indexOf(value) !== -1
+        },
     },
-    backgroundColor: {
-      type: String,
+    color: String,
+    dark: Boolean,
+    prependIcon: String,
+    appendIcon: String,
+    icon: String,
+    rounded: {
+        type: String,
+        validator: function (value) {
+            return ['0', 'xs', 'sm', 'default', 'lg', 'xl'].indexOf(value) !== -1
+        },
     },
-  },
-
-  emits: ['click'],
-
-  setup(props, { emit }) {
-    props = reactive(props);
-    return {
-      classes: computed(() => ({
-        'storybook-button': true,
-        'storybook-button--primary': props.primary,
-        'storybook-button--secondary': !props.primary,
-        [`storybook-button--${props.size || 'medium'}`]: true,
-      })),
-      style: computed(() => ({
-        backgroundColor: props.backgroundColor,
-      })),
-      onClick() {
-        emit('click');
-      },
-    };
-  },
-};
+    density: {
+        type: String,
+        validator: function (value) {
+            return ['compact', 'default', 'comfortable'].indexOf(value) !== -1
+        },
+    },
+    onClick: Function
+})
 </script>
+
+<style scoped>
+.darkText{
+    color: white !important;
+}
+.defaultButton{
+    box-shadow: none;
+    text-transform: none;
+    font-size: 0.75rem;
+}
+</style>

@@ -49,7 +49,7 @@
     class="appbarShadow"
   >
     <v-app-bar-nav-icon class="d-lg-none" variant="text" @click.stop="toggle"></v-app-bar-nav-icon>
-    <SearchInput />
+    <SearchInput label="What are you looking for?" />
     <v-spacer></v-spacer>
     <v-btn variant="text" rounded="xl" color="primary">
       <v-badge color="error" dot floating>

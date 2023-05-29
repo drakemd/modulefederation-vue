@@ -4,7 +4,7 @@
         :loading="loading"
         density="compact"
         variant="solo"
-        label="What are you looking for?"
+        :label="label"
         class="w-20 ml-6 searchInput"
         single-line
         hide-details
@@ -20,6 +20,11 @@
 <script setup>
     import { ref } from 'vue'
     import { Colors } from '../../constants/constants.js'
+
+    defineProps({
+        label: String
+    })
+
     const loading = ref(false)
     const message = ref('')
 

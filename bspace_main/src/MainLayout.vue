@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import MyButton from '../../bspace_design_system/src/components/Button/ButtonVtf'
 import MyHeader from '../../bspace_design_system/src/components/Header/Header'
 import { useRouter, useRoute } from 'vue-router'
 
