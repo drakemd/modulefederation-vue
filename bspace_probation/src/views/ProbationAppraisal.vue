@@ -34,16 +34,6 @@
     </div>
     <template v-if="!isLoading">
         <v-table class="mt-3">
-            <!-- <thead>
-                <tr class="text-caption poppins tableHeader">
-                    <th class="text-start">Item KPI</th>
-                    <th class="text-start">Weight</th>
-                    <th class="text-start">Target</th>
-                    <th class="text-start">Lead To KPI Direct</th>
-                    <th class="text-start">Action</th>
-                    <th class="text-start"> </th>
-                </tr>
-            </thead> -->
             <TableHeader />
             <tbody>
                 <template v-for="(item, index) in list" :key="item.kpi">
@@ -63,26 +53,6 @@
             ></v-progress-circular>
         </div>
     </template>
-    <!-- <div class="d-flex mt-4">
-        <div class="d-flex flex-1-0 align-center">
-            <div>
-                <v-select
-                    :items="[5, 10, 50]"
-                    v-model="pageSize"
-                    variant="outlined"
-                    density="compact"
-                ></v-select>
-            </div>
-        </div>
-        <div>
-            <v-pagination
-                v-model="page"
-                :length="totalPage"
-                :active-color="Colors.primary"
-                size="small"
-            ></v-pagination>
-        </div>
-    </div> -->
     <v-divider class="my-3"></v-divider>
     <div class="w-100 px-6 py-6 attachmentContainer">
         <div class="text-body-2 font-weight-bold">Attachment</div>
