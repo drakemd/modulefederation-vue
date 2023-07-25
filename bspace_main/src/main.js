@@ -10,9 +10,10 @@ window.fsEvents = events;
 
 // define remote remote components
 const ProbationPage = defineAsyncComponent(() => import('bspace_probation/ProbationPage'))
-app.component('ProbationPage', ProbationPage)
 
 const app = createApp(Layout)
+app.component('ProbationPage', ProbationPage)
+
 registerPlugins(app)
 app.use(router)
 app.mount('#app')
